@@ -1,4 +1,3 @@
-
 exports.up = (knex) => {
     return knex.schema.createTable('movies', (table) => {
         table.increments('id')
@@ -10,6 +9,6 @@ exports.up = (knex) => {
     });
 };
 
-exports.down = function(knex) {
+exports.down = (knex) => {
   return knex.schema.dropTable('movies');
 };
