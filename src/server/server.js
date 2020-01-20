@@ -14,10 +14,10 @@ app.use(logger());
 app.use(koaJson());
 app.use(cors({credentials: true}));
 app.use(koaBodyParser());
-app.use(errorHandler());
+app.use(errorHandler);
 app.use(composedRouter());
 
-app.on('error', (err) => {
+app.on('error', err => {
   console.log(err);
 });
 

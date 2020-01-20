@@ -8,8 +8,8 @@
     "rollback": "npx knex migrate:rollback",
     "migrate": "npx knex migrate:latest",
     "seed": "npx knex seed:run",
-    "devstart": "npx nodemon ./src/server/server.js",
-    "start": "node ./src/server/server.js"
+    "devstart": "npx nodemon ./src/server/server-init.js",
+    "start": "node ./src/server/server-init.js"
   },
   "jest": {
     "testEnvironment": "node"
