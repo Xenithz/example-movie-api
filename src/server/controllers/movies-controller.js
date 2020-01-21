@@ -1,13 +1,6 @@
 const knex = require('../../database/db');
 const uuidv4 = require('uuid/v4');
 
-const test = ctx => {
-    ctx.status = 200;
-    ctx.body = {
-        message: 'hi'
-    };
-};
-
 const addMovie = async ctx => {
     const queryResults = await knex('movies')
     .insert({ u_movie_id: uuidv4(), t_movie_name: ctx.request.body.t_movie_name, t_movie_genre: ctx.request.body.t_movie_genre, t_movie_director: ctx.request.body.t_movie_director });
@@ -45,10 +38,19 @@ const deleteMovieByUUID = async ctx => {
     };
 }
 
+const updateMovie = async ctx => {
+    const queryResults = await knex('movies').where({ u_movie_id: ctx.request.body.u_movie_id }).update(ctx.request.body);
+    ctx.status = 200;
+    ctx.body = {
+        message: 'success',
+        value: queryResults
+    };
+}
+
 module.exports = {
-    test,
     getAllMovies,
     getMovieByUUID,
     addMovie,
-    deleteMovieByUUID
+    deleteMovieByUUID,
+    updateMovie
 }
