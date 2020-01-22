@@ -9,13 +9,8 @@ on:
     - master
 
 jobs:
-  container-job:
+  vm-job:
     runs-on: ubuntu-latest
-    
-    # runs all of the steps inside the specified container rather than on the VM host.  
-    # Because of this the network configuration changes from host based network to a container network.
-    container:
-      image:  node:alpine
 
     services:
       postgres:
@@ -25,7 +20,8 @@ jobs:
           DB_PASSWORD: foobar
           DB_NAME: example_movie_api
         ports:
-        - 5432:5432
+        # will assign a random free host port
+        - 5432/tcp
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
@@ -34,13 +30,12 @@ jobs:
     - run: npm ci
     - run: npm run migrate
       env:
-        # use postgres for the host here because we have specified a container for the job.
-        # If we were running the job on the VM this would be localhost
-        DB_HOST: postgres
-        DB_PORT: ${{ job.services.postgres.ports[5432] }}
+        # use localhost for the host here because we are running the job on the VM.
+        # If we were running the job on in a container this would be postgres
+        DB_HOST: localhost
+        DB_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
     - run: npm run seed
     - run: npm run test
-
   # build:
 
   #   runs-on: ubuntu-latest
