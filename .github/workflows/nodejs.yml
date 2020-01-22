@@ -14,12 +14,11 @@ jobs:
 
     services:
       postgres:
-        image: postgres:10.8
+        image: postgres:latest
         env:
           DB_USER: test_user
           DB_PASSWORD: foobar
           DB_NAME: example_movie_api
-          NODE_ENV: test
         ports:
         # will assign a random free host port
         - 5432/tcp
@@ -33,9 +32,6 @@ jobs:
       env:
         # use localhost for the host here because we are running the job on the VM.
         # If we were running the job on in a container this would be postgres
-        DB_USER: test_user
-        DB_PASSWORD: foobar
-        DB_NAME: example_movie_api
         NODE_ENV: test
         DB_HOST: localhost
         DB_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
