@@ -18,7 +18,7 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
       database: process.env.DB_NAME,
       user:     process.env.DB_USER,
@@ -29,6 +29,7 @@ module.exports = {
       max: 10
     },
     migrations: {
+      directory: __dirname + '/src/database/migrations',
       tableName: 'knex_migrations'
     },
     seeds: {
@@ -37,7 +38,7 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
       database: process.env.DB_NAME,
       user:     process.env.DB_USER,
@@ -48,6 +49,7 @@ module.exports = {
       max: 10
     },
     migrations: {
+      directory: __dirname + '/src/database/migrations',
       tableName: 'knex_migrations'
     }
   }

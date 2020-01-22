@@ -19,6 +19,7 @@ jobs:
           DB_USER: test_user
           DB_PASSWORD: foobar
           DB_NAME: example_movie_api
+          NODE_ENV: test
         ports:
         # will assign a random free host port
         - 5432/tcp
