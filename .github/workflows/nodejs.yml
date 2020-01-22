@@ -16,9 +16,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          DB_USER: test_user
-          DB_PASSWORD: foobar
-          DB_NAME: example_movie_api
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          DB_NAME: postgres
         ports:
         # will assign a random free host port
         - 5432/tcp
